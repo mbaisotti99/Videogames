@@ -1,42 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const gamesList = require("../data/videogames");
+const videogameController = require("../controllers/videogameController")
 
 // index
-router.get('/', (req, res) => {
-    res.json({
-        data: gamesList,
-        count: gamesList.length
-    });
-});
+router.get('/', videogameController.index);
 
 // show
-router.get('/:id', (req, res) => {
-    const gameId = req.params.id;
-    res.json('leggiamo solo un determinato dato' + gameId);
-});
+router.get('/:id', videogameController.show);
 
 // create
-router.post('/', (req, res) => {
-    res.json('creiamo un nuovo elemento');
-});
+router.post('/', videogameController.create);
 
 // update
-router.put('/:id', (req, res) => {
-    const gameId = req.params.id;
-    res.json('modifichiamo i dati di uno specifico elemento' + gameId);
-});
+router.put('/:id', videogameController.update);
 
 // modify
-router.patch('/:id', (req, res) => {
-    const gameId = req.params.id;
-    res.json('modifichiamo gli specifici dati uno specifico elemento' + gameId);
-});
+router.patch('/:id', videogameController.modify);
 
 // destroy
-router.delete('/:id', (req, res) => {
-    const gameId = req.params.id;
-    res.json('eliminiamo un elemento' + gameId);
-});
+router.delete('/:id', videogameController.destroy);
 
 module.exports = router;
