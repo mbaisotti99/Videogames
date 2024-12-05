@@ -37,8 +37,18 @@ const modify = (req, res) => {
 }
 
 const destroy = (req, res) => {
-    const gameId = req.params.id;
-    res.json('eliminiamo un elemento' + gameId);
+    const gameId = parseInt(req.params.id);
+    const indexToDelete = gamesList.findIndex((curItem) => curItem.id === gameId)
+    if (indexToDelete === -1) {
+        res.statusCode = 404
+        res.json({
+            message: "Non trovato",
+            error: true
+        })
+    } else {
+        gamesList.splice(indexToDelete,1)
+        res.sendStatus(204)
+    }
 }
 
 module.exports = {
